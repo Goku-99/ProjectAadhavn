@@ -108,14 +108,15 @@ export const ImageGallery: React.FC = () => {
   return (
     <section 
       ref={ref}
-      className="py-20 bg-gray-50"
+      className="py-20 bg-neutral"
+      id="project-gallery"
       itemScope 
       itemType="https://schema.org/ImageGallery"
     >
       <div className="max-w-7xl mx-auto px-4">
         <h2 
           className="text-4xl font-bold text-center mb-12"
-          itemProp="name"
+          itemProp="name text-accent"
         >
           Project Gallery
         </h2>
@@ -131,8 +132,8 @@ export const ImageGallery: React.FC = () => {
             }}
             pagination={{ 
               clickable: true,
-              bulletClass: 'swiper-pagination-bullet !bg-black/60 !opacity-50',
-              bulletActiveClass: '!opacity-100'
+              bulletClass: 'swiper-pagination-bullet !bg-secondary-black/60',
+              bulletActiveClass: '!bg-accent'
             }}
             loop={true}
             className="relative group"
@@ -188,7 +189,7 @@ export const ImageGallery: React.FC = () => {
             className="custom-swiper-button-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/70 p-4 rounded-full shadow-lg hover:bg-white/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black/20 touch-manipulation"
             aria-label="Previous image"
           >
-            <ChevronLeft className="w-6 h-6 text-gray-900" />
+            <ChevronLeft className="w-6 h-6 text-secondary-black" />
           </button>
           <button 
             className="custom-swiper-button-next absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/70 p-4 rounded-full shadow-lg hover:bg-white/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black/20 touch-manipulation"
@@ -212,7 +213,7 @@ export const ImageGallery: React.FC = () => {
               e.stopPropagation();
               setFullscreenImage(null);
             }}
-            className="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
+            className="absolute top-6 right-6 text-secondary-white/70 hover:text-secondary-white hover:bg-secondary-white/10 transition-colors p-2 rounded-full"
             aria-label="Close fullscreen view"
           >
             <X className="w-8 h-8" />

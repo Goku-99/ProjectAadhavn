@@ -134,26 +134,33 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-12">Download Brochure</h2>
+    <section id="contact-us" className="py-20 px-4 bg-neutral">      
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12 text-accent">Download Brochure</h2>
 
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <Phone className="w-6 h-6 mr-3 text-gray-600" />
-                <span className="text-gray-800">+91 70168 04497</span>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-semibold mb-6 text-secondary-black">Get in Touch</h3>
+              <div className="space-y-4">
+                <div className="flex items-center">
+                  <Phone className="w-6 h-6 mr-3 text-primary" />
+                  <span className="text-gray-700">+91 70168 04497</span>
+                </div>
+                <div className="flex items-center">
+                  <Phone className="w-6 h-6 mr-3 text-primary" />
+                  <span className="text-gray-700">+91 84016 04039</span>
+                </div>
+                <div className="flex items-center">
+                  <MapPin className="w-6 h-6 mr-3 text-primary" />
+                  <span className="text-gray-700">
+                    Nr Neminath Digambar Jain Temple,<br />
+                    Behind Flora Ixora.<br />
+                    South Bopal, Ahmedabad.
+                  </span>
               </div>
               <div className="flex items-center">
-                <Phone className="w-6 h-6 mr-3 text-gray-600" />
-
-                <span className="text-gray-800">+91 84016 04039</span>
-              </div>
-              <div className="flex items-center">
-                <MapPin className="w-6 h-6 mr-3 text-gray-600" />
-                <span className="text-gray-800">
+                <MapPin className="w-6 h-6 mr-3 text-primary" />
+                <span className="text-gray-700">
                   Nr Neminath Digambar Jain Temple,<br />
                   Behind Flora Ixora.<br />
                   South Bopal, Ahmedabad.
@@ -161,16 +168,16 @@ export const Contact: React.FC = () => {
               </div>
             </div>
           </div>
-
+          
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <input
                 type="text"
                 placeholder="Your Name *"
-                className={`w-full px-4 py-2 rounded-lg border ${
+                className={`w-full px-4 py-2 rounded-lg border-gray-300 ${
                   touched.name && errors.name ?
-                  'border-red-500' : 'border-gray-300'
-                } focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200`}
+                  'border-red-500' : ''
+                } focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all duration-200`}
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 onBlur={() => handleBlur('name')}
@@ -187,10 +194,10 @@ export const Contact: React.FC = () => {
 
                 type="email"
                 placeholder="Email Address"
-                className={`w-full px-4 py-2 rounded-lg border ${
+                className={`w-full px-4 py-2 rounded-lg border-gray-300 ${
                   touched.email && errors.email ?
-                  'border-red-500' : 'border-gray-300'
-                } focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200`}
+                  'border-red-500' : ''
+                } focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all duration-200`}
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 onBlur={() => handleBlur('email')}
@@ -205,10 +212,10 @@ export const Contact: React.FC = () => {
                 type="tel"
 
                 placeholder="Phone Number"
-                className={`w-full px-4 py-2 rounded-lg border ${
+                className={`w-full px-4 py-2 rounded-lg border-gray-300 ${
                   touched.phone && errors.phone ?
-                  'border-red-500' : 'border-gray-300'
-                } focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all duration-200`}
+                  'border-red-500' : ''
+                } focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all duration-200`}
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 onBlur={() => handleBlur('phone')}
@@ -223,9 +230,9 @@ export const Contact: React.FC = () => {
               disabled={!isValid}
 
               className={`w-full py-3 rounded-lg font-medium transition-colors duration-300 ${
-                isValid
-                  ? 'bg-black text-white hover:bg-gray-800'
-                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  isValid ?
+                'bg-accent text-secondary-white hover:bg-primary' :
+                'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >
               Download Brochure
@@ -233,6 +240,7 @@ export const Contact: React.FC = () => {
           </form>
         </div>
         {submissionError && (
+
           <p className="mt-4 text-sm text-red-600">{submissionError}</p>
         )}
       </div>

@@ -67,23 +67,23 @@ const specifications: Specification[] = [
 
 export const Specifications: React.FC = () => {
   return (
-    <section className="py-16 px-4 bg-white">
+    <section className="py-16 px-4 bg-secondary-white">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold tracking-wider mb-12">SPECIFICATIONS</h2>
+        <h2 className="text-3xl font-bold text-accent tracking-normal mb-12">SPECIFICATIONS</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {specifications.map((spec, index) => {
             const Icon = spec.icon;
             return (
-              <div key={index} className="border border-gray-200 rounded-lg p-6 hover:shadow-sm transition-shadow">
+              <div key={index} className="border border-neutral rounded-lg p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
-                  <Icon className="w-6 h-6 stroke-[1.5px]" />
-                  <h3 className="text-lg font-medium">{spec.title}</h3>
+                  <Icon className="w-6 h-6 stroke-[1.5px] text-primary" />
+                  <h3 className="text-lg font-medium text-secondary-black">{spec.title}</h3>
                 </div>
                 <ul className="space-y-2.5">
                   {spec.details.map((detail, idx) => (
-                    <li key={idx} className="text-gray-600 text-sm leading-relaxed flex items-start">
-                      <span className="mr-2 text-gray-400">•</span>
+                    <li key={idx} className="text-gray-700 text-sm leading-relaxed flex items-start">
+                      <span className="mr-2 text-primary">•</span>
                       {detail}
                     </li>
                   ))}
