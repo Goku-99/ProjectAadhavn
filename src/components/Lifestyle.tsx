@@ -8,16 +8,17 @@ export const Lifestyle: React.FC = () => {
         <div >
         <h2 className="text-3xl font-bold text-accent tracking-normal mb-12">LIFESTYLE</h2>
         
-            <p className="text-lg text-gray-900">
-              Accessible Luxury: Experience the prestige of high-end living, Aadhvan Shine brings your dream of a luxurious home within reach.
+            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+              <strong>Luxury:</strong> Experience the prestige of high-end living, Aadhvan Shine offers luxurious living where modern living meets elegance.              
             </p>
-            <p className="text-lg text-gray-900">
-              Elegance: Elevate your everyday life in a home that combines style, comfort, and convenience. Find joy in the details and create lasting memories in a space designed for your well-being.
+            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+              <strong>Indulge:</strong> Immerse yourself in a world where every detail at Aadhvan Shine embodies sophistication and comfort. Find joy in a space meticulously crafted for your well-being, creating lasting memories in a home that truly reflects your success.
             </p>
-            <p className="text-lg text-gray-900">
-              Balanced Life: Experience the best of both worlds – the vibrancy of city living and the tranquility of a thoughtfully designed home. Aadhvan Shine offers a perfect equilibrium of excitement and relaxation.
+            <p className="text-gray-700 text-sm leading-relaxed mb-4">
+              <strong>Balance:</strong> Experience the best of both worlds – the vibrancy of city living and the tranquility of a thoughtfully designed home. Aadhvan Shine offers a perfect equilibrium of excitement and relaxation.
             </p>
-          
+
+
         </div>
          {/* Image */}
          <div>

@@ -73,29 +73,12 @@ const images: GalleryImage[] = [
     width: 1350,
     height: 900,
     thumbnail: '/images/Building_Exterior_Play_area.jpeg'
-  },
-  {
-    id: 'living-room2',
-    url: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-    webpUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80&fm=webp',
-    alt: 'Spacious living room interior with modern furnishings and natural lighting',
-    width: 1350,
-    height: 900,
-    thumbnail: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60'
-  },
-  {
-    id: 'kitchen-dining',
-    url: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
-    webpUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80&fm=webp',
-    alt: 'Modern kitchen and dining area with premium finishes and appliances',
-    width: 1350,
-    height: 900,
-    thumbnail: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60'
   }
 ];
 
 export const ImageGallery: React.FC = () => {
   const [fullscreenImage, setFullscreenImage] = useState<GalleryImage | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(-1);
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true
@@ -103,27 +86,52 @@ export const ImageGallery: React.FC = () => {
 
   const handleImageClick = useCallback((image: GalleryImage) => {
     setFullscreenImage(image);
+    const index = images.findIndex(img => img.id === image.id);
+    if (index !== -1) {
+      setCurrentImageIndex(index);
+    }
   }, []);
+
+  const handlePrevImage = useCallback(() => {
+    setCurrentImageIndex(prevIndex => {
+      const newIndex = (prevIndex - 1 + images.length) % images.length;
+      setFullscreenImage(images[newIndex]);
+      return newIndex;
+    });
+  }, []);
+
+  const handleNextImage = useCallback(() => {
+    setCurrentImageIndex(prevIndex => {
+      const newIndex = (prevIndex + 1) % images.length;
+      setFullscreenImage(images[newIndex]);
+      return newIndex;
+    });
+  }, []);
+
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (fullscreenImage) {
+      if (event.key === 'ArrowLeft') handlePrevImage();
+      if (event.key === 'ArrowRight') handleNextImage();
+    }}, [fullscreenImage, handlePrevImage, handleNextImage]);React.useEffect(() => {window.addEventListener('keydown', handleKeyDown);return () => {window.removeEventListener('keydown', handleKeyDown);};}, [handleKeyDown]);
 
   return (
     <section 
       ref={ref}
       className="py-20 bg-neutral"
-      id="project-gallery"
-      itemScope 
+      id="project-gallery"      itemScope
       itemType="https://schema.org/ImageGallery"
     >
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-8">
         <h2 
-          className="text-4xl font-bold text-center mb-12"
-          itemProp="name text-accent"
+          className="text-3xl font-bold text-accent tracking-normal mb-12 text-center"
+          itemProp="name"
         >
-          Project Gallery
+          PROJECT GALLERY
         </h2>
         
         <meta itemProp="description" content="Gallery showcasing Aadhvan Shine's luxury apartments and amenities" />
         
-        <div className="relative">
+        <div className="relative max-w-6xl mx-auto">
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             navigation={{
@@ -152,8 +160,8 @@ export const ImageGallery: React.FC = () => {
                 itemType="https://schema.org/ImageObject"
               >
                 <div 
-                  className="aspect-w-16 aspect-h-9 cursor-pointer"
-                  onClick={() => handleImageClick(image)}
+                  className="cursor-pointer"
+                  onClick={() => handleImageClick(image)} // This seems to be duplicated later
                 >
                   {inView && (
                     <>
@@ -174,8 +182,8 @@ export const ImageGallery: React.FC = () => {
                           height={image.height}
                           placeholderSrc={image.thumbnail}
                           effect="blur"
-                          className="w-full h-full object-cover rounded-lg"
-                          wrapperClassName="w-full h-full"
+                          className="max-w-full max-h-[90vh] object-contain rounded-lg"
+                          wrapperClassName="max-w-full max-h-[90vh]"
                         />
                       </picture>
                     </>
@@ -200,6 +208,7 @@ export const ImageGallery: React.FC = () => {
         </div>
       </div>
 
+      {/* Fullscreen Image Container */}
       {fullscreenImage && (
         <div 
           className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center"
@@ -209,15 +218,39 @@ export const ImageGallery: React.FC = () => {
           aria-label="Fullscreen image view"
         >
           <button
+            // Close Button
             onClick={(e) => {
               e.stopPropagation();
               setFullscreenImage(null);
             }}
-            className="absolute top-6 right-6 text-secondary-white/70 hover:text-secondary-white hover:bg-secondary-white/10 transition-colors p-2 rounded-full"
+            className="absolute top-6 right-6 text-secondary-white/70 hover:text-secondary-white hover:bg-secondary-white/10 transition-colors p-2 rounded-full z-50"
             aria-label="Close fullscreen view"
           >
             <X className="w-8 h-8" />
           </button>
+
+          {/* Navigation Buttons */}
+          {currentImageIndex > 0 && (
+ <button
+ onClick={(e) => { e.stopPropagation(); handlePrevImage(); }}
+ className="absolute left-4 top-1/2 -translate-y-1/2 z-50 text-secondary-white/70 hover:text-secondary-white hover:bg-secondary-white/10 transition-colors p-3 rounded-full"
+ aria-label="Previous image"
+ >
+ <ChevronLeft className="w-10 h-10" />
+ </button>
+          )}
+
+          {currentImageIndex < images.length - 1 && (
+ <button
+ onClick={(e) => { e.stopPropagation(); handleNextImage(); }}
+ className="absolute right-4 top-1/2 -translate-y-1/2 z-50 text-secondary-white/70 hover:text-secondary-white hover:bg-secondary-white/10 transition-colors p-3 rounded-full"
+ aria-label="Next image"
+ >
+ <ChevronRight className="w-10 h-10" />
+ </button>
+          )}
+
+
           <picture>
             <source
               srcSet={fullscreenImage.webpUrl}
@@ -226,7 +259,7 @@ export const ImageGallery: React.FC = () => {
             <img
               src={fullscreenImage.url}
               alt={fullscreenImage.alt}
-              className="max-h-[90vh] max-w-[90vw] object-contain"
+              className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg"
               loading="eager"
               width={fullscreenImage.width}
               height={fullscreenImage.height}

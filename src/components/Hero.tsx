@@ -83,7 +83,7 @@ export const Hero: React.FC = () => {
               href="#"
               data-section="download-brochure"
               onClick={handleScrollToSection}
-              className="bg-secondary-white text-accent py-2 px-4 rounded-md hover:bg-neutral hover:text-accent hover:underline transition-all duration-300 font-light text-sm lg:text-base"
+              className="bg-accent text-secondary-white py-2 px-4 rounded-md hover:bg-neutral hover:text-accent hover:underline transition-all duration-300 font-medium text-sm lg:text-base"
             >
               Download Brochure
             </a>
