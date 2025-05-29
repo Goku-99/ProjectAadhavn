@@ -50,7 +50,7 @@ export const Hero: React.FC = () => {
         <ul className="flex items-center space-x-4 lg:space-x-8">
           <li>
             <a
-              href="#"
+              href="#lifestyle"
               data-section="lifestyle"
               onClick={handleScrollToSection}
               className="text-accent hover:underline transition-all duration-300 font-medium text-sm lg:text-base p-2 rounded-md"
@@ -60,7 +60,7 @@ export const Hero: React.FC = () => {
           </li>
           <li>
             <a
-              href="#home"
+              href="#project-gallery"
               data-section="project-gallery"
               onClick={handleScrollToSection}
               className="text-accent hover:underline transition-all duration-300 font-medium text-sm lg:text-base p-2 rounded-md"
@@ -70,7 +70,17 @@ export const Hero: React.FC = () => {
           </li>
           <li>
             <a
-              href="#contact"
+              href="#specifications"
+              data-section="specifications"
+              onClick={handleScrollToSection}
+              className="text-accent hover:underline transition-all duration-300 font-medium text-sm lg:text-base p-2 rounded-md"
+            >
+              Specifications
+            </a>
+          </li>
+          <li>
+            <a
+              href="#contact-us"
               data-section="contact-us"
               onClick={handleScrollToSection}
               className="text-accent hover:underline transition-all duration-300 font-medium text-sm lg:text-base p-2 rounded-md"
@@ -80,8 +90,8 @@ export const Hero: React.FC = () => {
           </li>
           <li>
             <a
-              href="#"
-              data-section="download-brochure"
+              href="#contact-us"
+              data-section="contact-us"
               onClick={handleScrollToSection}
               className="bg-accent text-secondary-white py-2 px-4 rounded-md hover:bg-neutral hover:text-accent hover:underline transition-all duration-300 font-medium text-sm lg:text-base"
             >
@@ -96,8 +106,7 @@ export const Hero: React.FC = () => {
       <div className="relative h-full container mx-auto px-4 lg:px-8">
         {/* Text Content - Left aligned and bottom positioned */}
         <div className="absolute bottom-0 left-0 px-4 lg:px-8 pb-16 lg:pb-24 max-w-2xl">
-          {/* Property Name */}
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-primary tracking-tight">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4 text-primary tracking-tight font-dancing">
             Aadhvan Shine
           </h1>
 

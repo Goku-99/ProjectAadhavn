@@ -10,6 +10,9 @@ export default {
         accent: '#8B7355',
         neutral: '#F5F5F5',
       },
+      fontFamily: {
+        dancing: ['Sacramento', 'cursive'],
+      },
     },
   },
   plugins: [],

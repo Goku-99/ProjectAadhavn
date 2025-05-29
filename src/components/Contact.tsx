@@ -136,8 +136,6 @@ export const Contact: React.FC = () => {
   return (
     <section id="contact-us" className="py-20 px-4 bg-neutral">      
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12 text-accent">Download Brochure</h2>
-
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <h3 className="text-2xl font-semibold mb-6 text-secondary-black">Get in Touch</h3>
@@ -157,18 +155,12 @@ export const Contact: React.FC = () => {
                     Behind Flora Ixora.<br />
                     South Bopal, Ahmedabad.
                   </span>
-              </div>
-              <div className="flex items-center">
-                <MapPin className="w-6 h-6 mr-3 text-primary" />
-                <span className="text-gray-700">
-                  Nr Neminath Digambar Jain Temple,<br />
-                  Behind Flora Ixora.<br />
-                  South Bopal, Ahmedabad.
-                </span>
-              </div>
+              </div>              
             </div>
           </div>
-          
+          <div>
+            <h2 className="text-4xl font-bold mb-12 text-accent">Download Brochure</h2>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <input
@@ -235,9 +227,10 @@ export const Contact: React.FC = () => {
                 'bg-gray-300 text-gray-500 cursor-not-allowed'
               }`}
             >
-              Download Brochure
+              Submit
             </button>
-          </form>
+            </form>
+          </div>
         </div>
         {submissionError && (
 

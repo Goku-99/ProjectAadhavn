@@ -1,13 +1,13 @@
 import React from 'react';
 import { Building2, Grid, ChefHat, Zap, DoorOpen as Door, Bath } from 'lucide-react';
 
-interface Specification {
+interface Specifications {
   icon: React.FC<{ className?: string }>;
   title: string;
   details: string[];
 }
 
-const specifications: Specification[] = [
+const specifications: Specifications[] = [
   {
     icon: Building2,
     title: 'Structure',
@@ -67,7 +67,7 @@ const specifications: Specification[] = [
 
 export const Specifications: React.FC = () => {
   return (
-    <section className="py-16 px-4 bg-secondary-white">
+    <section id="specifications" className="py-16 px-4 bg-secondary-white">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold text-accent tracking-normal mb-12">SPECIFICATIONS</h2>
         
