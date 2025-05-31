@@ -76,7 +76,7 @@ const images: GalleryImage[] = [
   }
 ];
 
-export const ImageGallery: React.FC = () => {
+const ImageGallery: React.FC = () => {
   const [fullscreenImage, setFullscreenImage] = useState<GalleryImage | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(-1);
   const { ref, inView } = useInView({
@@ -138,61 +138,62 @@ export const ImageGallery: React.FC = () => {
               prevEl: '.custom-swiper-button-prev',
               nextEl: '.custom-swiper-button-next',
             }}
-            pagination={{ 
+            pagination={{
               clickable: true,
               bulletClass: 'swiper-pagination-bullet !bg-secondary-black/60',
               bulletActiveClass: '!bg-accent'
             }}
             loop={true}
             className="relative group"
-            a11y={{
-              prevSlideMessage: 'Previous slide',
-              nextSlideMessage: 'Next slide',
-              firstSlideMessage: 'This is the first slide',
-              lastSlideMessage: 'This is the last slide',
-              paginationBulletMessage: 'Go to slide {{index}}'
-            }}
-          >
+ a11y={{
+ prevSlideMessage: 'Previous slide',
+ nextSlideMessage: 'Next slide',
+ firstSlideMessage: 'This is the first slide.',
+ lastSlideMessage: 'This is the last slide.',
+ paginationBulletMessage: 'Go to slide {{index}}'
+ }}
+ >
             {images.map((image) => (
-              <SwiperSlide 
-                key={image.id}
-                itemScope 
-                itemType="https://schema.org/ImageObject"
-              >
-                <div 
-                  className="cursor-pointer"
-                  onClick={() => handleImageClick(image)} // This seems to be duplicated later
+ <SwiperSlide
+ key={image.id}
+ itemScope
+ itemType="https://schema.org/ImageObject"
+ >
+ <div
+ className="cursor-pointer"
+ onClick={() => handleImageClick(image)} // This seems to be duplicated later
+ >
+ {inView && (
+ <>
+ <meta itemProp="contentUrl" content={image.url} />
+ <meta itemProp="name" content={image.alt} />
+ <meta itemProp="width" content={image.width.toString()} />
+ <meta itemProp="height" content={image.height.toString()} />
+
+ <picture>
+ <source
+ srcSet={image.webpUrl}
+ type="image/webp"
+ />
+ <LazyLoadImage
+ src={image.url}
+ alt={image.alt}
+ width={image.width}
+ height={image.height}
+ placeholderSrc={image.thumbnail}
+ effect="blur"
+ className="max-w-full max-h-[90vh] object-contain rounded-lg"
+ wrapperClassName="max-w-full max-h-[90vh]"
                 >
-                  {inView && (
-                    <>
-                      <meta itemProp="contentUrl" content={image.url} />
-                      <meta itemProp="name" content={image.alt} />
-                      <meta itemProp="width" content={image.width.toString()} />
-                      <meta itemProp="height" content={image.height.toString()} />
-                      
-                      <picture>
-                        <source
-                          srcSet={image.webpUrl}
-                          type="image/webp"
-                        />
-                        <LazyLoadImage
-                          src={image.url}
-                          alt={image.alt}
-                          width={image.width}
-                          height={image.height}
-                          placeholderSrc={image.thumbnail}
-                          effect="blur"
-                          className="max-w-full max-h-[90vh] object-contain rounded-lg"
-                          wrapperClassName="max-w-full max-h-[90vh]"
-                        />
-                      </picture>
-                    </>
-                  )}
+ </LazyLoadImage>
+ </picture>
+ </>
+ )}
                 </div>
-              </SwiperSlide>
+ </SwiperSlide>
             ))}
-          </Swiper>
-          
+ </Swiper>
+
           <button 
             className="custom-swiper-button-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/70 p-4 rounded-full shadow-lg hover:bg-white/90 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-black/20 touch-manipulation"
             aria-label="Previous image"
@@ -270,3 +271,5 @@ export const ImageGallery: React.FC = () => {
     </section>
   );
 };
+
+export default ImageGallery;

@@ -7,4 +7,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    allowedHosts: ['loca.lt', 'my-app-review-aa11.loca.lt'],
+  },
 });

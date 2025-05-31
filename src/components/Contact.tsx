@@ -13,7 +13,7 @@ interface FormErrors {
   phone?: string;
 }
 
-export const Contact: React.FC = () => {
+const Contact: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -240,3 +240,5 @@ export const Contact: React.FC = () => {
     </section>
   );
 };
+
+export default Contact;

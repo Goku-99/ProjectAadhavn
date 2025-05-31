@@ -65,7 +65,7 @@ const specifications: Specifications[] = [
   }
 ];
 
-export const Specifications: React.FC = () => {
+const Specifications: React.FC = () => {
   return (
     <section id="specifications" className="py-16 px-4 bg-secondary-white">
       <div className="max-w-7xl mx-auto">
@@ -96,3 +96,5 @@ export const Specifications: React.FC = () => {
     </section>
   );
 };
+
+export default Specifications;

@@ -10,7 +10,7 @@ const amenities = [
   { icon: Car, name: 'Parking', description: 'Reserved parking' },
 ];
 
-export const Amenities = () => {
+const Amenities = () => {
   return (
     <section className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
@@ -32,3 +32,5 @@ export const Amenities = () => {
     </section>
   );
 };
+
+export default Amenities;
