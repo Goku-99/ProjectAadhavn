@@ -1,6 +1,9 @@
 import React from 'react';
 import { MapPin } from 'lucide-react';
 
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+
 export const Hero: React.FC = () => {
   const handleScrollToSection = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault(); // Prevent the default jump behavior
@@ -15,6 +18,11 @@ export const Hero: React.FC = () => {
     }
   };
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
   return (
     <div className="relative h-screen bg-gray-900">
       {/* Background Image Container */}
@@ -45,10 +53,11 @@ export const Hero: React.FC = () => {
           />
         </a>
 
-      {/* Navigation Items - Top Right */}
-      <nav>
-        <ul className="flex items-center space-x-4 lg:space-x-8">
-          <li>
+        {/* Navigation Items - Top Right */}
+        <> {/* Wrap navigation content in a fragment */}
+          <nav className="hidden lg:flex"> {/* Hide desktop nav on small screens */}
+            <ul className="flex items-center space-x-4 lg:space-x-8">
+              {/* Fix for duplicate li tag */}
             <a
               href="#lifestyle"
               data-section="lifestyle"
@@ -56,10 +65,10 @@ export const Hero: React.FC = () => {
               className="text-accent hover:underline transition-all duration-300 font-medium text-sm lg:text-base p-2 rounded-md"
             >
               Lifestyle
-            </a>
-          </li>
+            </a>          
           <li>
             <a
+
               href="#project-gallery"
               data-section="project-gallery"
               onClick={handleScrollToSection}
@@ -79,7 +88,7 @@ export const Hero: React.FC = () => {
             </a>
           </li>
           <li>
-            <a
+            <a 
               href="#contact-us"
               data-section="contact-us"
               onClick={handleScrollToSection}
@@ -99,9 +108,75 @@ export const Hero: React.FC = () => {
             </a>
           </li>
         </ul>
-      </nav>
+        </nav>
 
-      </div>
+        {/* Mobile Navigation Button */}
+        <button className="lg:hidden text-accent z-20" onClick={toggleMobileMenu}>
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+
+        {/* Mobile Menu */}
+        <div className={`fixed top-0 right-0 w-64 h-full bg-secondary-white shadow-lg z-20 transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'} lg:hidden`}>
+          <button onClick={toggleMobileMenu} className="absolute top-4 right-4 text-accent">
+            <X className="w-6 h-6" />
+          </button>
+          <ul className="flex flex-col items-center space-y-6 py-8 mt-16">
+            <li>
+              <a
+                href="#lifestyle"
+                data-section="lifestyle"
+                onClick={handleScrollToSection} // Keep existing scroll behavior
+                className="text-accent hover:underline transition-all duration-300 font-medium text-lg p-2 rounded-md"
+              >
+                Lifestyle
+              </a>
+            </li>
+            <li>
+              <a
+                href="#project-gallery"
+                data-section="project-gallery"
+                onClick={handleScrollToSection} // Keep existing scroll behavior
+                className="text-accent hover:underline transition-all duration-300 font-medium text-lg p-2 rounded-md"
+              >
+                Project Gallery
+              </a>
+            </li>
+            <li>
+              <a
+                href="#specifications"
+                data-section="specifications"
+                onClick={handleScrollToSection} // Keep existing scroll behavior
+                className="text-accent hover:underline transition-all duration-300 font-medium text-lg p-2 rounded-md"
+              >
+                Specifications
+              </a>
+            </li>
+            <li>
+              <a
+                href="#contact-us"
+                data-section="contact-us"
+                onClick={handleScrollToSection} // Keep existing scroll behavior
+                className="text-accent hover:underline transition-all duration-300 font-medium text-lg p-2 rounded-md"
+              >
+                Contact Us
+              </a>
+            </li>
+            <li>
+              <a
+                href="#contact-us"
+                data-section="contact-us"
+                onClick={handleScrollToSection} // Keep existing scroll behavior
+                className="bg-accent text-secondary-white py-2 px-4 rounded-md hover:bg-neutral hover:text-accent hover:underline transition-all duration-300 font-medium text-lg"
+              >
+                Download Brochure
+              </a>
+            </li>
+          </ul>
+        </div>
+      </>
+
+      </div> {/* Closing tag for Header Container */}
+
       {/* Content Container */}
       <div className="relative h-full container mx-auto px-4 lg:px-8">
         {/* Text Content - Left aligned and bottom positioned */}
